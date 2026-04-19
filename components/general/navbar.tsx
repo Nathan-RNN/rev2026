@@ -1,25 +1,37 @@
+"use client";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
+import ToggleTheme from "./toggleTheme";
 
 export function Navbar() {
   return (
-    <nav className="flex gap-3 items-center justify-around py-4">
+    <nav className="flex gap-3 items-center justify-between py-2">
       <Link href="/">
         <h1 className="text-3xl font-bold">
-          Next <span className="text-blue-700">PRO</span>
+          Next<span className="text-blue-700">PRO</span>
         </h1>
       </Link>
-      <div className="flex justify-center">
-        <Link href="/">Home</Link>
-        <Link href="/blog">Blog</Link>
-        <Link href="/create">Create blog</Link>
+      <div className="flex gap-6 justify-center">
+        <Link className={buttonVariants({ variant: "ghost" })} href="/">
+          Home
+        </Link>
+        <Link className={buttonVariants({ variant: "ghost" })} href="/blog">
+          Blog
+        </Link>
+        <Link className={buttonVariants({ variant: "ghost" })} href="/create">
+          Create
+        </Link>
       </div>
-      <div className="flex gap-2">
-        <Link className={buttonVariants()} href="/login">
+      <div className="flex gap-3">
+        <ToggleTheme />
+        <Link className={buttonVariants()} href="/auth/login">
           Login
         </Link>
-        <Link className={buttonVariants()} href="/register">
-          Register
+        <Link
+          className={buttonVariants({ variant: "secondary" })}
+          href="/auth/sign-up"
+        >
+          Sign up
         </Link>
       </div>
     </nav>
