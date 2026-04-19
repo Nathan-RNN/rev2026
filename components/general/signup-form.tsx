@@ -15,12 +15,12 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { SignUpSchema, signUpSchema } from "@/schemas/auth";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useForm } from "react-hook-form";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const form = useForm<SignUpSchema>({
-    resolver: zodResolver(signUpSchema),
+    resolver: standardSchemaResolver(signUpSchema),
     defaultValues: {
       name: "",
       email: "",
