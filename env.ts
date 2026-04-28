@@ -1,0 +1,9 @@
+function getEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing env variable: ${name}`);
+  }
+  return value;
+}
+
+export const SITE_URL = getEnv("SITE_URL");

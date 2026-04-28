@@ -1,9 +1,12 @@
 "use client";
 import Link from "next/link";
-import { buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import ToggleTheme from "./toggleTheme";
+import { useConvexAuth } from "convex/react";
+import { authClient } from "@/lib/auth-client";
 
 export function Navbar() {
+  const { isAuthenticated, isLoading } = useConvexAuth();
   return (
     <nav className="flex gap-3 items-center justify-between py-2">
       <Link href="/">
@@ -24,15 +27,27 @@ export function Navbar() {
       </div>
       <div className="flex gap-3">
         <ToggleTheme />
-        <Link className={buttonVariants()} href="/auth/login">
-          Login
-        </Link>
-        <Link
-          className={buttonVariants({ variant: "secondary" })}
-          href="/auth/sign-up"
-        >
-          Sign up
-        </Link>
+        {isLoading ? null : isAuthenticated ? (
+          <Button
+            onClick={() => {
+              authClient.signOut({});
+            }}
+          >
+            Logout
+          </Button>
+        ) : (
+          <>
+            <Link className={buttonVariants()} href="/auth/login">
+              Login
+            </Link>
+            <Link
+              className={buttonVariants({ variant: "secondary" })}
+              href="/auth/sign-up"
+            >
+              Sign up
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );

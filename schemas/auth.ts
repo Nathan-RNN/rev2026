@@ -16,7 +16,6 @@ export const signUpSchema = z
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
-
 export type SignUpSchema = z.infer<typeof signUpSchema>;
 
 export const loginSchema = z.object({
@@ -26,3 +25,4 @@ export const loginSchema = z.object({
     .min(8, { message: "Password must be at least 8 characters long" })
     .max(30),
 });
+export type LoginSchema = z.infer<typeof loginSchema>;
